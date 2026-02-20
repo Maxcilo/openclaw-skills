@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "totalReviews": 0,
+    "totalErrors": 7,
+    "totalImprovements": 5
+  },
+  "errorCategories": {
+    "emotion": 3,
+    "position": 1,
+    "risk": 2,
+    "analysis": 1
+  },
+  "topErrors": [
+    {
+      "category": "emotion",
+      "description": "贪婪导致收益流失",
+      "solution": "及时止盈，分批获利"
+    },
+    {
+      "category": "position",
+      "description": "持仓过重+加杠杆",
+      "solution": "控制仓位，避免过度杠杆"
+    },
+    {
+      "category": "emotion",
+      "description": "对标的抱有幻想导致归零",
+      "solution": "流动性充足时出手，不要幻想"
+    }
+  ],
+  "improvements": [
+    {
+      "description": "所有标的在流动性充足时及时出手",
+      "priority": "high",
+      "status": "pending"
+    },
+    {
+      "description": "所有利润都要进行一部分提现",
+      "priority": "high",
+      "status": "pending"
+    },
+    {
+      "description": "每周梳理自己的资产",
+      "priority": "high",
+      "status": "pending"
+    },
+    {
+      "description": "控制仓位，避免过度杠杆",
+      "priority": "high",
+      "status": "pending"
+    }
+  ],
+  "keyLessons": [
+    "慢就是快",
+    "贪婪是原罪",
+    "尊重大环境",
+    "保持耐心"
+  ],
+  "note": "此为脱敏摘要，不包含具体金额、标的名称、精确数据"
+}

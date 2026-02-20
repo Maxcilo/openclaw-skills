@@ -1,0 +1,67 @@
+{
+  "records": [
+    {
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T15:23:19.394Z",
+      "total": 155000,
+      "details": {
+        "binance": 131000,
+        "okx": 69000,
+        "onchain": 35000,
+        "debt": 80000
+      },
+      "crypto": {
+        "exchange": 200000,
+        "contract": 0,
+        "wallet": 35000
+      },
+      "traditional": {
+        "bank": 0,
+        "other": 0
+      },
+      "note": "币安131k + OK大号69k = 200k交易所，链上35k，需偿还80k，净资产155k"
+    },
+    {
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T05:17:28.859Z",
+      "total": 154975,
+      "details": {
+        "binance": 131000,
+        "okx": 69000,
+        "onchain": 35000,
+        "debt": 80000
+      },
+      "crypto": {
+        "exchange": 200000,
+        "contract": 975,
+        "wallet": 35000
+      },
+      "traditional": {
+        "bank": 0,
+        "other": 0
+      },
+      "note": "合约本金1000u，当前剩余975u，亏损25u（有一笔未记录的亏损）"
+    },
+    {
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T17:53:19.125Z",
+      "binance": 124000,
+      "okx": 67000,
+      "onchain": 30000,
+      "total": 221000,
+      "position_ratio": 0.95,
+      "note": "95%重仓，市场震荡偏空"
+    },
+    {
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T18:00:16.869Z",
+      "binance": 124000,
+      "okx": 67000,
+      "onchain": 30000,
+      "debt": 80000,
+      "net_worth": 141000,
+      "position_ratio": 0.95,
+      "note": "95%重仓，有8万U负债，标的处于历史低位"
+    }
+  ]
+}

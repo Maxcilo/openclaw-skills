@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1770803375381
+    },
+    "polymarket-weather-trader": {
+      "version": "1.7.2",
+      "installedAt": 1771170634236
+    },
+    "polymarket-mert-sniper": {
+      "version": "1.0.3",
+      "installedAt": 1771170684851
+    },
+    "botcoin": {
+      "version": "1.2.0",
+      "installedAt": 1771290545893
+    }
+  }
+}

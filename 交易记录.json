@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1771080515890,
+    "status": "closed",
+    "openTime": "2026-02-14T14:48:35.890Z",
+    "date": "2026-02-14",
+    "symbol": "ETH",
+    "direction": "做多",
+    "entryPrice": 2072.28,
+    "quantity": 1,
+    "leverage": 5,
+    "stopLoss": 2035,
+    "takeProfit": null,
+    "tradeType": "合约",
+    "reason": "ETH 1小时看涨双孕线",
+    "exitPrice": 2081,
+    "exitTime": "2026-02-14T16:11:24.562Z",
+    "profitAmount": 43.599999999999,
+    "profitPercent": "2.10"
+  },
+  {
+    "id": 1771132486919,
+    "status": "closed",
+    "openTime": "2026-02-15T05:14:46.919Z",
+    "date": "2026-02-15",
+    "symbol": "ETH",
+    "direction": "做多",
+    "entryPrice": 2058,
+    "quantity": 1,
+    "leverage": 5,
+    "stopLoss": 2038,
+    "takeProfit": 0,
+    "tradeType": "合约",
+    "reason": "止损被打",
+    "exitPrice": 2038,
+    "exitTime": "2026-02-15T05:14:51.883Z",
+    "profitAmount": "-22.05",
+    "profitPercent": "-1.07"
+  }
+]

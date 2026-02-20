@@ -1,0 +1,157 @@
+{
+  "reviews": [
+    {
+      "id": 1771132568087,
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T05:16:08.087Z",
+      "title": "ETH 2058做多被止损",
+      "tradeId": "1771132486919",
+      "summary": "在趋势线支撑位开单，但被11点巨量抛售打止损，止损后又上涨",
+      "whatWentWell": "止损设置合理（20点）",
+      "whatWentWrong": "入场时机不佳：太接近压力位，周末流动性低波动大",
+      "lessons": "周末流动性低，接近压力位时容易被打止损",
+      "nextSteps": "1. 避免周末在压力位附近开单 2. 等待远离压力位或周一流动性恢复 3. 周末可以观望，不强行交易"
+    }
+  ],
+  "errors": [
+    {
+      "id": 1771081039246,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:19.246Z",
+      "category": "emotion",
+      "description": "贪婪导致收益流失",
+      "impact": "W最高16w→2k, ME最高4w→2k, pipe最高18w→0, 节点猴最高20w→5k, 铭文符文最高15w→1w",
+      "solution": "及时止盈，分批获利"
+    },
+    {
+      "id": 1771081044882,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:24.882Z",
+      "category": "position",
+      "description": "持仓过重+加杠杆",
+      "impact": "因贪婪导致整体持仓过重，最后还加了杠杆",
+      "solution": "控制仓位，避免过度杠杆"
+    },
+    {
+      "id": 1771081051188,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:31.188Z",
+      "category": "risk",
+      "description": "不愿承担新标的风险，却承受山寨大额亏损",
+      "impact": "对新机会不敢尝试，却在山寨上默默承受大额亏损",
+      "solution": "合理分配风险预算，新机会小仓试错"
+    },
+    {
+      "id": 1771081057007,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:37.007Z",
+      "category": "emotion",
+      "description": "对标的抱有幻想导致归零",
+      "impact": "总是对某个标的抱有幻想，导致最后都在手上归零",
+      "solution": "流动性充足时出手，不要幻想"
+    },
+    {
+      "id": 1771081062688,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:42.688Z",
+      "category": "risk",
+      "description": "对金钱和资产不尊重",
+      "impact": "没有时刻统计管理资金，没有正确金钱观念，很多资产默默归零",
+      "solution": "建立资产管理系统，定期统计"
+    },
+    {
+      "id": 1771081069886,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:49.886Z",
+      "category": "emotion",
+      "description": "不够有耐心，时刻拉满状态",
+      "impact": "没有耐心，总是把自己处于拉满的状态",
+      "solution": "慢就是快，保持耐心"
+    },
+    {
+      "id": 1771081077512,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:57:57.512Z",
+      "category": "analysis",
+      "description": "没有尊重大环境",
+      "impact": "忽视宏观环境和市场趋势",
+      "solution": "交易前先看大环境和趋势"
+    },
+    {
+      "id": 1771086876444,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T16:34:36.444Z",
+      "category": "other",
+      "description": "长期持有合约导致巨额亏损",
+      "impact": "巨大（80000u）",
+      "solution": "合约只用于短期，长期用现货"
+    },
+    {
+      "id": 1771132557126,
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T05:15:57.126Z",
+      "category": "timing",
+      "description": "周末流动性低时在压力位附近开单",
+      "impact": "被止损亏损2",
+      "solution": "避免周末交易，或等待远离压力位"
+    }
+  ],
+  "improvements": [
+    {
+      "id": 1771081083513,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:58:03.513Z",
+      "status": "pending",
+      "description": "所有标的在流动性充足时及时出手",
+      "priority": "high"
+    },
+    {
+      "id": 1771081089208,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:58:09.208Z",
+      "status": "pending",
+      "description": "所有利润都要进行一部分提现",
+      "priority": "high"
+    },
+    {
+      "id": 1771081096358,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:58:16.358Z",
+      "status": "pending",
+      "description": "每周梳理自己的资产",
+      "priority": "high"
+    },
+    {
+      "id": 1771081101544,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:58:21.544Z",
+      "status": "pending",
+      "description": "控制仓位，避免过度杠杆",
+      "priority": "high"
+    },
+    {
+      "id": 1771081106621,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T14:58:26.621Z",
+      "status": "pending",
+      "description": "新机会小仓试错，合理分配风险预算",
+      "priority": "medium"
+    },
+    {
+      "id": 1771086880899,
+      "date": "2026-02-14",
+      "timestamp": "2026-02-14T16:34:40.899Z",
+      "status": "pending",
+      "description": "合约定位",
+      "priority": "合约 = 短期工具（几小时到几天）\\n现货 = 长期投资（几周到几年）\\n不要用合约做长期持仓"
+    },
+    {
+      "id": 1771132561751,
+      "date": "2026-02-15",
+      "timestamp": "2026-02-15T05:16:01.751Z",
+      "status": "pending",
+      "description": "周末交易规则：避免在压力位附近开单，或等待周一流动性恢复",
+      "priority": "high"
+    }
+  ]
+}
