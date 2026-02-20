@@ -91935,3 +91935,982 @@ Get your API key from: simmer.markets/dashboard → SDK tab
   Entry opportunities: 0
   Exit opportunities:  1
   Trades executed:     0
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9403.15
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 78 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 78
+  Near expiry:     0
+  ⏭️  Safeguard blocked: Slippage too high: 18.6%
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⏭️  Safeguard blocked: Slippage too high: 15.1%
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9403.15
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  ⏭️  Safeguard blocked: Slippage too high: 18.6%
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+  Found 78 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 78
+  Near expiry:     0
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⏭️  Safeguard blocked: Slippage too high: 18.6%
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9403.15
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 94 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 94
+  Near expiry:     0
+  ⏭️  Safeguard blocked: Slippage too high: 17.5%
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9403.15
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 93 active markets
+
+  Markets expiring within 10 minutes: 3
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  Smart sizing: $10.00 (5% of $9403.15 balance)
+
+  Will Ghazl El Mahalla SC win on 2026-02-20?
+     Resolves in: 9m 53s
+     Split: YES 18% / NO 82%
+     Side: NO (82% >= 52%)
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+     Executing trade...
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     Bought 12.2 NO shares @ $0.82
+
+  Will Ghazl El Mahalla SC vs. ZED FC end in a draw?
+     Resolves in: 9m 53s
+     Split: YES 35% / NO 65%
+     Side: NO (65% >= 52%)
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+     Executing trade...
+     Bought 15.4 NO shares @ $0.65
+
+  Will ZED FC win on 2026-02-20?
+     Resolves in: 9m 53s
+     Split: YES 48% / NO 52%
+     Side: NO (52% >= 52%)
+     Executing trade...
+     Bought 19.0 NO shares @ $0.53
+
+==================================================
+  Summary:
+  Markets scanned: 93
+  Near expiry:     3
+  Strong split:    3
+  Trades executed: 3
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9372.73
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 91 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 91
+  Near expiry:     0
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 101 weather markets
+  Grouped into 22 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  Balance: $9372.73
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 91 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 91
+  Near expiry:     0
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 22
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 100 weather markets
+  Grouped into 21 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.32
+  ⚠️  Warnings: Edge 53.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.32 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 21
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 100 weather markets
+  Grouped into 21 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.30
+  Balance: $9372.73
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 56 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 56
+  Near expiry:     0
+  ⚠️  Warnings: Edge 55.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.30 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 21
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 100 weather markets
+  Grouped into 21 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.30
+  ⚠️  Warnings: Edge 55.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.30 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 21
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🎯 Mert Sniper - Near-Expiry Conviction Trading
+==================================================
+
+  Configuration:
+  Filter:        (all markets)
+  Max bet:       $10.00
+  Expiry window: 10 minutes
+  Min split:     52%/48%
+  Max trades:    10
+  Smart sizing:  Enabled
+  Safeguards:    Enabled
+
+  Portfolio:
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Balance: $9372.73
+  Exposure: $0.00
+  Positions: 0
+
+  Fetching markets...
+  Found 54 active markets
+
+  Markets expiring within 10 minutes: 0
+
+==================================================
+  Summary:
+  Markets scanned: 54
+  Near expiry:     0
+  Found 100 weather markets
+  Grouped into 21 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.30
+  ⚠️  Warnings: Edge 55.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.30 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 21
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
+🌤️  Simmer Weather Trading Skill
+==================================================
+
+⚙️  Configuration:
+  Entry threshold: 10% (buy below this)
+  Exit threshold:  25% (sell above this)
+  Max position:    $1.00
+  Max market exposure: $30.00
+  Max trades/run:  10
+  Locations:       NYC, CHICAGO, SEATTLE, ATLANTA, DALLAS, MIAMI
+  Smart sizing:    ✓ Enabled
+  Safeguards:      ✓ Enabled
+  Trend detection: ✓ Enabled
+
+💰 Portfolio:
+  Balance: $0.00
+  Exposure: $0.00
+  Positions: 0
+
+📡 Fetching weather markets...
+  Found 100 weather markets
+  Grouped into 21 events
+
+📍 NYC 2026-02-22 (high temp)
+  Fetching NOAA forecast...
+  NOAA forecast: 38°F
+  Matching bucket: 38-39°F @ $0.30
+  ⚠️  Warnings: Edge 55.0% ≥ threshold 2.5% - good opportunity
+  ⏸️  Price $0.30 above threshold $0.10 - skip
+
+📍 NYC 2026-02-22 (high temp)
+  NOAA forecast: 38°F
+  ⚠️  No bucket found for 38°F
+
+📈 Checking 4 weather positions for exit...
+  📤 Will the highest temperature in New York City be b...
+     Price $1.00 >= exit threshold $0.25
+     ⏭️  Skipped: Market already resolved
+  📊 Will the highest temperature in New York City be b...
+     Price $0.00 < exit threshold $0.25 - hold
+
+==================================================
+📊 Summary:
+  Events scanned: 21
+  Entry opportunities: 0
+  Exit opportunities:  1
+  Trades executed:     0
