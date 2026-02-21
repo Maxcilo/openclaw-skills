@@ -1732,3 +1732,21 @@
 发现 0 个新市场
 检查完成
 
+[2026/2/21 17:30:02] 开始检查新市场...
+请求: https://gamma-api.polymarket.com/markets?limit=50&active=true
+获取到 50 个市场
+发现 0 个新市场
+检查完成
+
+[2026/2/21 18:00:01] 开始检查新市场...
+请求: https://gamma-api.polymarket.com/markets?limit=50&active=true
+获取到 50 个市场
+发现 0 个新市场
+检查完成
+
+[2026/2/21 18:30:01] 开始检查新市场...
+请求: https://gamma-api.polymarket.com/markets?limit=50&active=true
+获取到 50 个市场
+发现 0 个新市场
+检查完成
+
