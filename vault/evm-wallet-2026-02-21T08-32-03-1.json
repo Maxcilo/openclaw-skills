@@ -1,0 +1,9 @@
+{
+  "address": "0xFF68AD2c40F028773A764D44269EE31c616A84E2",
+  "privateKey": "0x74c4cea4ed3b6b18ec655ed3fdef89bbb9be46d53fe3fefc3000bc5bf1016a77",
+  "mnemonic": {
+    "phrase": "since coral say year side pipe life gauge run hat acquire trade",
+    "path": "m/44'/60'/0'/0/0",
+    "locale": "en"
+  }
+}

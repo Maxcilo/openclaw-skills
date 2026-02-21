@@ -1,0 +1,149 @@
+{
+  "0x2fee02fad2ff69a7905767b6e5b54c610d425941": {
+    "address": "0x2fEE02faD2FF69A7905767b6E5B54C610D425941",
+    "label": "0号地址（主地址）",
+    "note": "用于代币分发和归集",
+    "createdAt": "2026-02-21T08:53:09.797Z",
+    "updatedAt": "2026-02-21T08:53:09.797Z"
+  },
+  "0x019f2e31e9450cd77dda247ccb76c56d26769094": {
+    "address": "0x019F2E31E9450CD77DDA247cCB76C56d26769094",
+    "label": "1号地址（子地址）",
+    "note": "子地址1",
+    "createdAt": "2026-02-21T08:53:26.695Z",
+    "updatedAt": "2026-02-21T08:53:26.695Z"
+  },
+  "0xbcc7ce14974efde5cb1501f526675d8a2473a7e2": {
+    "address": "0xBCc7Ce14974EFde5Cb1501F526675D8A2473a7E2",
+    "label": "2号地址（子地址）",
+    "note": "子地址2",
+    "createdAt": "2026-02-21T08:53:26.724Z",
+    "updatedAt": "2026-02-21T08:53:26.724Z"
+  },
+  "0xa3caeb161b6ebca08830c28474ceb63e35c7592b": {
+    "address": "0xA3cAEb161B6eBCa08830C28474CEB63e35C7592b",
+    "label": "3号地址（子地址）",
+    "note": "子地址3",
+    "createdAt": "2026-02-21T08:53:26.753Z",
+    "updatedAt": "2026-02-21T08:53:26.753Z"
+  },
+  "0xbdcd517d85ecfb38e17a3bdaca50b27b9636c031": {
+    "address": "0xBdCd517d85ECfb38e17a3BDACa50B27B9636c031",
+    "label": "4号地址（子地址）",
+    "note": "子地址4",
+    "createdAt": "2026-02-21T08:53:26.782Z",
+    "updatedAt": "2026-02-21T08:53:26.782Z"
+  },
+  "0xa6a6822416c120dce27d71255235726535da0a31": {
+    "address": "0xa6A6822416c120DcE27D71255235726535dA0a31",
+    "label": "5号地址（子地址）",
+    "note": "子地址5",
+    "createdAt": "2026-02-21T08:53:26.811Z",
+    "updatedAt": "2026-02-21T08:53:26.811Z"
+  },
+  "0xe3a9a2b4829279508039419efc1b5847a8f8db2e": {
+    "address": "0xE3A9A2B4829279508039419efc1b5847A8F8dB2e",
+    "label": "6号地址（子地址）",
+    "note": "子地址6",
+    "createdAt": "2026-02-21T08:53:26.839Z",
+    "updatedAt": "2026-02-21T08:53:26.839Z"
+  },
+  "0x2b9c6f5f6bd80b02dfa609909616bcf63dec1a0a": {
+    "address": "0x2B9C6f5f6Bd80b02DFa609909616BcF63DEC1a0A",
+    "label": "7号地址（子地址）",
+    "note": "子地址7",
+    "createdAt": "2026-02-21T08:53:26.867Z",
+    "updatedAt": "2026-02-21T08:53:26.867Z"
+  },
+  "0xbe51e4e89662be160f5acfc5368e241925a4b52e": {
+    "address": "0xbE51e4E89662bE160f5ACfc5368E241925A4b52e",
+    "label": "8号地址（子地址）",
+    "note": "子地址8",
+    "createdAt": "2026-02-21T08:53:26.901Z",
+    "updatedAt": "2026-02-21T08:53:26.901Z"
+  },
+  "0xa47d5e6cff5cc29243dcd33d8a4ebbfb73712634": {
+    "address": "0xa47D5e6CfF5cC29243DCD33d8a4EbBFB73712634",
+    "label": "9号地址（子地址）",
+    "note": "子地址9",
+    "createdAt": "2026-02-21T08:53:26.929Z",
+    "updatedAt": "2026-02-21T08:53:26.930Z"
+  },
+  "0x34653e00db1004d59878e0ea316b63a95c44e9be": {
+    "address": "0x34653e00DB1004d59878E0EA316B63a95c44E9be",
+    "label": "10号地址（子地址）",
+    "note": "子地址10",
+    "createdAt": "2026-02-21T08:53:26.958Z",
+    "updatedAt": "2026-02-21T08:53:26.958Z"
+  },
+  "0x54c58e630c9321d305aea293ea17349f2450a80b": {
+    "address": "0x54c58e630c9321D305aea293EA17349f2450a80B",
+    "label": "11号地址（子地址）",
+    "note": "子地址11",
+    "createdAt": "2026-02-21T08:53:26.987Z",
+    "updatedAt": "2026-02-21T08:53:26.988Z"
+  },
+  "0xb860377c104cb90f21590e30309f50d6d8a3854d": {
+    "address": "0xB860377C104Cb90F21590e30309F50D6d8a3854D",
+    "label": "12号地址（子地址）",
+    "note": "子地址12",
+    "createdAt": "2026-02-21T08:53:27.016Z",
+    "updatedAt": "2026-02-21T08:53:27.016Z"
+  },
+  "0xeff69eebad076220881da0cedb8539ec26c43055": {
+    "address": "0xEFf69EeBAD076220881da0CEDb8539eC26c43055",
+    "label": "13号地址（子地址）",
+    "note": "子地址13",
+    "createdAt": "2026-02-21T08:53:27.044Z",
+    "updatedAt": "2026-02-21T08:53:27.044Z"
+  },
+  "0xbf658f1fe412347275fdeaca6d85e9c16545c966": {
+    "address": "0xbF658f1Fe412347275fdEaCA6d85E9C16545C966",
+    "label": "14号地址（子地址）",
+    "note": "子地址14",
+    "createdAt": "2026-02-21T08:53:27.072Z",
+    "updatedAt": "2026-02-21T08:53:27.072Z"
+  },
+  "0xa3e94ff191110e70333de1d8c7e73294d2944e32": {
+    "address": "0xA3e94fF191110e70333dE1D8C7e73294D2944E32",
+    "label": "15号地址（子地址）",
+    "note": "子地址15",
+    "createdAt": "2026-02-21T08:53:27.100Z",
+    "updatedAt": "2026-02-21T08:53:27.100Z"
+  },
+  "0xcad24685c212a30d0227e0adda53d9d20b348221": {
+    "address": "0xcad24685c212A30d0227E0AdDA53d9D20b348221",
+    "label": "16号地址（子地址）",
+    "note": "子地址16",
+    "createdAt": "2026-02-21T08:53:27.128Z",
+    "updatedAt": "2026-02-21T08:53:27.128Z"
+  },
+  "0x724fd0a02dde7f9d701e049b7fec8e238b58a082": {
+    "address": "0x724Fd0a02Dde7F9d701e049B7FEC8E238B58A082",
+    "label": "17号地址（子地址）",
+    "note": "子地址17",
+    "createdAt": "2026-02-21T08:53:27.156Z",
+    "updatedAt": "2026-02-21T08:53:27.156Z"
+  },
+  "0x4459d9f4f1390f4f920afb851cdfbe7810530f64": {
+    "address": "0x4459D9F4F1390f4f920AfB851cDfBe7810530F64",
+    "label": "18号地址（子地址）",
+    "note": "子地址18",
+    "createdAt": "2026-02-21T08:53:27.184Z",
+    "updatedAt": "2026-02-21T08:53:27.185Z"
+  },
+  "0x64abe14da98cce05fd87406691fac74c21119c26": {
+    "address": "0x64aBe14dA98ccE05Fd87406691faC74c21119c26",
+    "label": "19号地址（子地址）",
+    "note": "子地址19",
+    "createdAt": "2026-02-21T08:53:27.213Z",
+    "updatedAt": "2026-02-21T08:53:27.213Z"
+  },
+  "0xb5c8f684ee1de088b191585cec516d39d2842ae3": {
+    "address": "0xB5C8F684Ee1de088B191585ceC516d39d2842aE3",
+    "label": "20号地址（子地址）",
+    "note": "子地址20",
+    "createdAt": "2026-02-21T08:53:27.241Z",
+    "updatedAt": "2026-02-21T08:53:27.241Z"
+  }
+}

@@ -14,7 +14,7 @@
 **高手教训：** swisstony亏损$57k | 对冲不是无风险 | 不要盲目跟单
 
 ## 工具
-agent-browser | ccxt
+agent-browser | ccxt | ethers.js（EVM批量转账）
 
 ## 文件
 - 双孕线指南：`双孕线识别指南.md`
@@ -32,6 +32,7 @@ agent-browser | ccxt
 - Polymarket策略：`event-analysis-profit-guide.md` 💡 事件分析盈利完整指南
 - Simmer训练：`simmer-training-mode.md` 🎓 | `simmer-training-analysis.py` 📊
 - 双代理系统：`dual-agent-trading-system.md` 👥 交易员+分析师
+- EVM钱包：`EVM钱包管理.md` 💼 批量转账工具
 
 ## 安全架构
 - `vault/` - 完整敏感数据（权限700，永不进LLM）
