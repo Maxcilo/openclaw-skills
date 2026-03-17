@@ -1,66 +1,66 @@
-# US Federal Reserve Liquidity Monitor
+# 美联储流动性监控系统
 
-A comprehensive monitoring system for tracking US Federal Reserve liquidity indicators with professional charts and intelligent analysis.
+一个全面的美联储流动性指标监控系统，提供专业图表和智能分析。
 
-## Features
+## 功能特性
 
-- 📊 Real-time monitoring of RRP, Bank Reserves, SOFR, TGA
-- 📈 Professional PNG charts with 30-day trends
-- 🤖 Intelligent analysis and risk assessment
-- 📱 Auto-send to Telegram (text + image)
-- 💾 Smart persistent storage with incremental updates
-- ⏰ Automated daily reports (8:00 & 20:00 Shanghai time)
+- 📊 实时监控 RRP、银行准备金、SOFR、TGA
+- 📈 专业PNG图表，展示30天趋势
+- 🤖 智能分析和风险评估
+- 📱 自动发送到Telegram（文本+图片）
+- 💾 智能持久化存储，增量更新
+- ⏰ 每天自动报告（上海时间8:00和20:00）
 
-## Quick Start
+## 快速开始
 
-### Installation
+### 安装
 
-1. Copy all files to your OpenClaw workspace:
+1. 复制所有文件到OpenClaw工作区：
 ```bash
 cp -r liquidity-monitor /root/.openclaw/workspace/skills/
 ```
 
-2. Install dependencies:
+2. 安装依赖：
 ```bash
 npm install chartjs-node-canvas canvas
 ```
 
-3. Configure (optional):
+3. 配置（可选）：
 ```bash
-# Edit liquidity-config.json to customize thresholds
+# 编辑 liquidity-config.json 自定义阈值
 ```
 
-### Usage
+### 使用
 
-#### Manual Run
+#### 手动运行
 
 ```bash
-# Full report (text + image to Telegram)
+# 完整报告（文本+图片发送到Telegram）
 node liquidity-report.js [telegram_user_id]
 
-# Generate charts only
+# 只生成图表
 node liquidity-chart.js
 
-# Update data only
+# 只更新数据
 node liquidity-storage.js update
 
-# View statistics
+# 查看统计
 node liquidity-storage.js stats
 ```
 
-#### Trigger Words
+#### 触发词
 
-In Telegram, say:
+在Telegram中发送：
 - "宏观数据"
 - "流动性监控"
 - "liquidity"
 
-#### Automated Reports
+#### 自动报告
 
-Set up OpenClaw cron job:
+通过OpenClaw cron任务设置：
 ```json
 {
-  "name": "Liquidity Monitor",
+  "name": "流动性监控",
   "schedule": {
     "kind": "cron",
     "expr": "0 0,12 * * *",
@@ -68,15 +68,15 @@ Set up OpenClaw cron job:
   },
   "payload": {
     "kind": "agentTurn",
-    "message": "Run liquidity monitoring report"
+    "message": "运行流动性监控报告"
   },
   "sessionTarget": "isolated"
 }
 ```
 
-## Output
+## 输出示例
 
-### Text Report
+### 文本报告
 
 ```
 💧 流动性监控
@@ -102,17 +102,17 @@ Set up OpenClaw cron job:
 市场流动性处于紧张状态，需密切关注。
 ```
 
-### Chart Image
+### 图表
 
-![Liquidity Charts](example-chart.png)
+![流动性图表](example-chart.png)
 
-- 1200x2440px PNG
-- 3 charts combined
-- 30-day trends
+- 1200x2440px PNG图片
+- 3张图表合并
+- 30天趋势
 
-## Configuration
+## 配置
 
-Edit `liquidity-config.json`:
+编辑 `liquidity-config.json`：
 
 ```json
 {
@@ -134,35 +134,35 @@ Edit `liquidity-config.json`:
 }
 ```
 
-## Data Sources
+## 数据源
 
-- **FRED API** (Federal Reserve Economic Data)
+- **FRED API**（美联储经济数据）
   - RRP: RRPONTSYD
-  - Reserves: WRESBAL
+  - 准备金: WRESBAL
   - SOFR: SOFR
   - TGA: WTREGEN
 
-## Architecture
+## 架构
 
 ```
 liquidity-monitor/
-├── SKILL.md                    # Skill definition
-├── README.md                   # This file
-├── liquidity-monitor.js        # Core monitoring (445 lines)
-├── liquidity-chart.js          # Chart generation (272 lines)
-├── liquidity-storage.js        # Data persistence (207 lines)
-├── liquidity-report.js         # Report sender (65 lines)
-└── liquidity-config.json       # Configuration
+├── SKILL.md                    # 技能定义
+├── README.md                   # 本文件
+├── liquidity-monitor.js        # 核心监控（445行）
+├── liquidity-chart.js          # 图表生成（272行）
+├── liquidity-storage.js        # 数据持久化（207行）
+├── liquidity-report.js         # 报告发送（65行）
+└── liquidity-config.json       # 配置文件
 ```
 
-## Performance
+## 性能
 
-- Full run: ~15 seconds
-- Data update: ~3 seconds
-- Chart generation: ~8 seconds
-- Message sending: ~4 seconds
+- 完整运行：约15秒
+- 数据更新：约3秒
+- 图表生成：约8秒
+- 消息发送：约4秒
 
-## Requirements
+## 依赖
 
 - Node.js v14+
 - chartjs-node-canvas
@@ -170,20 +170,20 @@ liquidity-monitor/
 - curl
 - OpenClaw
 
-## Limitations
+## 限制
 
-- RRP/SOFR: T+1 data (next day)
-- Reserves/TGA: Weekly Wednesday update
-- FRED API: No rate limit but avoid frequent requests
+- RRP/SOFR：T+1数据（次日更新）
+- 准备金/TGA：每周三更新
+- FRED API：无速率限制，但建议避免频繁请求
 
-## Version
+## 版本
 
-**v3.0** - 2026-03-17
+**v3.0.0** - 2026-03-17
 
-## Author
+## 作者
 
 大富小姐姐 🎀
 
-## License
+## 许可证
 
 MIT
