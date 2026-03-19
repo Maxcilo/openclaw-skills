@@ -54,13 +54,22 @@ fi
 # 4. 待处理问题
 echo "--- open issues ---"
 if [ -n "${ISSUES:-}" ] && [ -f "$ISSUES" ]; then
-  grep "⏳ 待处理" "$ISSUES" 2>/dev/null || echo "No open issues."
+  grep "⏳ 待处理" "$ISSUES" 2>/dev/null || { echo "No open issues."; true; }
 else
   echo "Issues file not found."
 fi
 echo
 
-# 5. 技术债务
+# 5. 改进建议
+echo "--- improvements ---"
+if [ -n "${IMPROVEMENTS:-}" ] && [ -f "$IMPROVEMENTS" ]; then
+  grep "^### " "$IMPROVEMENTS" 2>/dev/null | head -3 || echo "No improvements."
+else
+  echo "Improvements file not found."
+fi
+echo
+
+# 6. 技术债务
 echo "--- tech debt summary ---"
 if [ -n "${TECH_DEBT:-}" ] && [ -f "$TECH_DEBT" ]; then
   grep "^### #" "$TECH_DEBT" 2>/dev/null | head -5 || echo "No tech debt."
@@ -69,7 +78,7 @@ else
 fi
 echo
 
-# 6. Git状态
+# 7. Git状态
 echo "--- git status ---"
 if [ -d "$BASE/.git" ]; then
   cd "$BASE" || error_exit "Failed to change to workspace directory"
