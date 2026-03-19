@@ -275,11 +275,10 @@ async function main() {
     getHistoryFRED('RRPONTSYD', 30),
     getHistoryFRED('WRESBAL', 30),
     getHistoryFRED('SOFR', 30),
-    getHistoryFRED('WTREGEN', 30),
-    getHistoryFRED('WALCL', 30)  // 添加美联储资产负债表历史
+    getHistoryFRED('WTREGEN', 30)
   ]);
   
-  const [rrp, reserves, sofr, tgaLatest, fedBS, rrpHistory, reservesHistory, sofrHistory, tgaHistory, fedBSHistory] = 
+  const [rrp, reserves, sofr, tgaLatest, fedBS, rrpHistory, reservesHistory, sofrHistory, tgaHistory] = 
     results.map(r => r.status === 'fulfilled' ? r.value : null);
   
   if (!rrp || !reserves || !sofr) {
@@ -299,55 +298,24 @@ async function main() {
     fedBS: fedBSCurrent.toString()
   };
   
-  // 构建历史数据 - 使用日期匹配而不是索引匹配
   const history = [];
-  const dateMap = {};
+  const minLen = Math.min(
+    rrpHistory?.length || 0,
+    reservesHistory?.length || 0,
+    sofrHistory?.length || 0,
+    tgaHistory?.length || 0
+  );
   
-  // 收集所有数据到 dateMap
-  rrpHistory?.forEach(d => {
-    if (!dateMap[d.observation_date]) dateMap[d.observation_date] = {};
-    dateMap[d.observation_date].rrp = d.RRPONTSYD;
-  });
-  
-  reservesHistory?.forEach(d => {
-    if (!dateMap[d.observation_date]) dateMap[d.observation_date] = {};
-    dateMap[d.observation_date].reserves = d.WRESBAL;
-  });
-  
-  sofrHistory?.forEach(d => {
-    if (!dateMap[d.observation_date]) dateMap[d.observation_date] = {};
-    dateMap[d.observation_date].sofr = d.SOFR;
-  });
-  
-  tgaHistory?.forEach(d => {
-    if (!dateMap[d.observation_date]) dateMap[d.observation_date] = {};
-    dateMap[d.observation_date].tga = (parseFloat(d.WTREGEN || 0) / 100).toString();
-  });
-  
-  fedBSHistory?.forEach(d => {
-    if (!dateMap[d.observation_date]) dateMap[d.observation_date] = {};
-    dateMap[d.observation_date].fedBS = (parseFloat(d.WALCL || 0) / 1000).toString();
-  });
-  
-  // 前向填充并构建历史数组
-  const sortedDates = Object.keys(dateMap).sort();
-  let lastRrp = null, lastReserves = null, lastSofr = null, lastTga = null, lastFedBS = null;
-  
-  for (const date of sortedDates) {
-    if (dateMap[date].rrp) lastRrp = dateMap[date].rrp;
-    if (dateMap[date].reserves) lastReserves = dateMap[date].reserves;
-    if (dateMap[date].sofr) lastSofr = dateMap[date].sofr;
-    if (dateMap[date].tga) lastTga = dateMap[date].tga;
-    if (dateMap[date].fedBS) lastFedBS = dateMap[date].fedBS;
-    
-    if (lastRrp && lastReserves && lastSofr && lastTga) {
+  for (let i = 0; i < minLen; i++) {
+    if (rrpHistory[i]?.observation_date === reservesHistory[i]?.observation_date &&
+        rrpHistory[i]?.observation_date === sofrHistory[i]?.observation_date &&
+        rrpHistory[i]?.observation_date === tgaHistory[i]?.observation_date) {
       history.push({
-        date,
-        rrp: lastRrp,
-        reserves: lastReserves,
-        sofr: lastSofr,
-        tga: lastTga,
-        fedBS: lastFedBS
+        date: rrpHistory[i].observation_date,
+        rrp: rrpHistory[i].RRPONTSYD || '0',
+        reserves: reservesHistory[i].WRESBAL || '0',
+        sofr: sofrHistory[i].SOFR || '0',
+        tga: (parseFloat(tgaHistory[i].WTREGEN || 0) / 100).toString()
       });
     }
   }
@@ -386,39 +354,19 @@ async function main() {
   // 净流动性
   const netLiquidity = calculateNetLiquidity(rrpVal, parseFloat(current.reserves), tgaCurrent);
   console.log('\n💰 净流动性：' + netLiquidity.toFixed(2) + ' 万亿');
-  console.log('   计算公式：RRP + Bank Reserves - TGA');
   
   // TGA
   const month = new Date().toISOString().slice(5, 7);
-  const monthlyPeak = CONFIG.tgaMonthlyPeaks[month];
-  if (monthlyPeak) {
-    const diff = tgaCurrent - monthlyPeak;
+  const currentTarget = CONFIG.tgaTargets[month];
+  if (currentTarget) {
+    const diff = tgaCurrent - currentTarget.endTarget;
     const flow = diff > 0 ? '💧 月底释放' + diff.toFixed(0) + '亿' : '🔴 月底回收' + Math.abs(diff).toFixed(0) + '亿';
-    console.log('• TGA：' + tgaCurrent.toFixed(0) + '亿，' + flow + '（预测值：' + monthlyPeak + '亿）');
+    console.log('• TGA：' + tgaCurrent.toFixed(0) + '亿，' + flow);
   }
   
   // 美联储资产负债表
   if (fedBSCurrent > 0) {
-    // 判断 QT/QE 状态
-    let qtStatus = '';
-    if (history.length >= 2 && history[0].fedBS) {  // 至少需要2条数据
-      const fedBS30dAgo = parseFloat(history[0].fedBS);
-      if (fedBS30dAgo > 0) {
-        const fedBSChange = fedBSCurrent - fedBS30dAgo;
-        const fedBSChangePercent = (fedBSChange / fedBS30dAgo * 100).toFixed(2);
-        const days = history.length;
-        if (fedBSChange < 0) {
-          qtStatus = '🔴 QT进行中（' + days + '日 ' + fedBSChangePercent + '%）';
-        } else {
-          qtStatus = '🟢 QE进行中（' + days + '日 +' + fedBSChangePercent + '%）';
-        }
-      } else {
-        qtStatus = '（数据不足）';
-      }
-    } else {
-      qtStatus = '（数据不足）';
-    }
-    console.log('• 🏦 美联储资产负债表：' + fedBSCurrent.toFixed(2) + '万亿 ' + qtStatus);
+    console.log('• 🏦 美联储资产负债表：' + fedBSCurrent.toFixed(2) + '万亿（QT进行中）');
   }
   
   // 数据解读
@@ -458,13 +406,12 @@ async function main() {
   }
   
   // TGA解读
-  const monthlyPeak2 = CONFIG.tgaMonthlyPeaks[month];
-  if (monthlyPeak2) {
-    const diff = tgaCurrent - monthlyPeak2;
+  if (currentTarget) {
+    const diff = tgaCurrent - currentTarget.endTarget;
     if (diff < 0) {
-      console.log('• TGA回收预期：月底需回收' + Math.abs(diff).toFixed(0) + '亿达到预测值（' + monthlyPeak2 + '亿），将抽离市场流动性。');
+      console.log('• TGA回收预期：月底需回收' + Math.abs(diff).toFixed(0) + '亿达到目标，将抽离市场流动性。');
     } else {
-      console.log('• TGA释放预期：月底可释放' + diff.toFixed(0) + '亿（预测值：' + monthlyPeak2 + '亿），将增加市场流动性。');
+      console.log('• TGA释放预期：月底可释放' + diff.toFixed(0) + '亿，将增加市场流动性。');
     }
   }
   
@@ -488,11 +435,6 @@ async function main() {
       cwd: path.dirname(__dirname)
     });
     console.log('✅ 图表已生成: data/charts/');
-    
-    // 输出图片路径，让 AI 在第二条消息中发送
-    console.log('\n---SEND_IMAGE---');
-    console.log('/root/.openclaw/workspace/data/charts/liquidity-combined.png');
-    console.log('---END_IMAGE---');
   } catch (e) {
     console.warn('⚠️ 图表生成失败:', e.message);
   }

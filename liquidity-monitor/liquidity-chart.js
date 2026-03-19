@@ -44,7 +44,7 @@ async function generateCharts() {
   const rrpData = history.map(h => parseFloat(h.rrp) * 10); // 转为亿
   const reservesData = history.map(h => parseFloat(h.reserves) / 1000000); // 转为万亿
   const sofrData = history.map(h => parseFloat(h.sofr));
-  const tgaData = history.map(h => parseFloat(h.tga) / 10000); // 转为万亿
+  const tgaData = history.map(h => parseFloat(h.tga));
   const netLiquidityData = history.map(h => 
     calculateNetLiquidity(parseFloat(h.rrp), parseFloat(h.reserves), parseFloat(h.tga))
   );
@@ -76,11 +76,11 @@ async function generateCharts() {
           tension: 0.1
         },
         {
-          label: 'TGA (万亿美元)',
+          label: 'TGA (亿美元)',
           data: tgaData,
           borderColor: 'rgb(255, 206, 86)',
           backgroundColor: 'rgba(255, 206, 86, 0.1)',
-          yAxisID: 'y1',
+          yAxisID: 'y2',
           tension: 0.1
         }
       ]
@@ -114,11 +114,16 @@ async function generateCharts() {
           position: 'right',
           title: {
             display: true,
-            text: 'Reserves & TGA (万亿美元)'
+            text: 'Reserves (万亿美元)'
           },
           grid: {
             drawOnChartArea: false
           }
+        },
+        y2: {
+          type: 'linear',
+          display: false,
+          position: 'right'
         }
       }
     }
