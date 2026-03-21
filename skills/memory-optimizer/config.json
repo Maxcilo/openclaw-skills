@@ -1,7 +1,0 @@
-{
-  "backup_dir": "memory/full-backup/",
-  "archive_dir": "memory/archive/",
-  "filtered_dir": "memory/filtered/",
-  "retention_days": 30,
-  "process_days_ago": 1
-}
