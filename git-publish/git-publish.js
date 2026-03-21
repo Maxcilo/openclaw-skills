@@ -397,7 +397,7 @@ async function main() {
 
     // 9. 同步到合集（更新模式也会重新生成 README）
     console.log(`\n🔄 同步到 openclaw-skills 合集...`);
-    await syncToCollection(skillName, skillPath, baseRealPath, isUpdate);
+    await syncToCollection(skillName, skillPath, baseRealPath);
 
     console.log(`\n🎉 发布完成!`);
 
