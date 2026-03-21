@@ -1,0 +1,11 @@
+scrapling>=0.2.0
+html2text>=2020.1.16
+curl-cffi>=0.5.0
+browserforge>=1.0.0
+weasyprint>=68.0
+markdown>=3.0
+Pillow>=10.0
+
+# 测试依赖
+pytest>=7.0.0
+pytest-cov>=4.0.0
