@@ -22,6 +22,7 @@ const VAULT_PATH = '/root/.openclaw/workspace/vault';
 let GITHUB_TOKEN = '';
 let GITHUB_USER = 'Maxcilo';
 const COLLECTION_REPO = 'openclaw-skills';
+const MAX_TOPICS = 20;
 
 // ============== 安全函数 ==============
 
@@ -31,6 +32,17 @@ function safeReadFile(filePath) {
 
 function safeWriteFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf-8');
+}
+
+/**
+ * 安全转义字符串用于 shell
+ */
+function escapeShell(str) {
+  return String(str)
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/`/g, '\\`')
+    .replace(/\$/g, '\\$');
 }
 
 /**
@@ -56,6 +68,17 @@ function validateTopic(topic) {
 }
 
 /**
+ * 验证 release 标签
+ */
+function validateRelease(release) {
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(release)) {
+    throw new Error(`release "${release}" 包含非法字符`);
+  }
+  if (release.length > 100) throw new Error('release 标签过长');
+  return true;
+}
+
+/**
  * 验证文件路径（防止符号链接攻击）
  */
 function validateSourcePath(basePath, fileName) {
@@ -69,15 +92,12 @@ function validateSourcePath(basePath, fileName) {
   }
   
   // 检查目标是否在允许范围内
-  if (!realPath.startsWith(basePath)) {
+  const resolved = path.resolve(basePath, fileName);
+  if (!resolved.startsWith(path.resolve(basePath))) {
     throw new Error(`路径遍历检测: ${fileName}`);
   }
   
   return true;
-}
-
-function realPath(basePath) {
-  return path.resolve(basePath);
 }
 
 /**
@@ -131,7 +151,7 @@ function showHelp() {
   console.log('');
   console.log('选项:');
   console.log('  --update        更新已存在的仓库');
-  console.log('  --topics=       添加topics标签 (逗号分隔)');
+  console.log('  --topics=       添加topics标签 (逗号分隔,最多20个)');
   console.log('  --release=      创建release版本');
   console.log('');
   console.log('示例:');
@@ -145,7 +165,7 @@ if (args.length < 1 || args[0] === '--help' || args[0] === '-h') {
 }
 
 // 解析参数
-let skillPath = args[0].replace(/^\.\//, '');
+const rawSkillPath = args[0].replace(/^\.\//, '');
 const isUpdate = args.includes('--update');
 
 let topics = [];
@@ -154,20 +174,28 @@ let release = '';
 args.forEach(arg => {
   if (arg.startsWith('--topics=')) {
     const value = arg.replace('--topics=', '');
-    topics = value.split(',')
+    const parsed = value.split(',')
       .map(t => t.trim().toLowerCase())
-      .filter(t => t)
-      .map(t => {
-        validateTopic(t);
-        return t;
-      });
+      .filter(t => t);
+    
+    // 验证 topics 数量
+    if (parsed.length > MAX_TOPICS) {
+      throw new Error(`topics 数量不能超过 ${MAX_TOPICS} 个`);
+    }
+    
+    topics = parsed.map(t => {
+      validateTopic(t);
+      return t;
+    });
   }
   if (arg.startsWith('--release=')) {
-    release = arg.replace('--release=', '').trim();
+    const value = arg.replace('--release=', '').trim();
+    validateRelease(value);
+    release = value;
   }
 });
 
-let skillName = path.basename(skillPath);
+let skillName = path.basename(rawSkillPath);
 
 // ============== 初始化 ==============
 
@@ -189,18 +217,18 @@ function init() {
   // 验证项目名称
   validateProjectName(skillName);
 
-  // 解析为绝对路径并验证
-  skillPath = path.resolve(skillPath);
+  // 解析为绝对路径
+  const resolvedSkillPath = path.resolve(rawSkillPath);
   
   // 检查 skill 路径是否存在
-  if (!fs.existsSync(skillPath)) {
-    console.error(`错误: Skill "${skillPath}" 不存在`);
+  if (!fs.existsSync(resolvedSkillPath)) {
+    console.error(`错误: Skill "${resolvedSkillPath}" 不存在`);
     process.exit(1);
   }
 
   // 必须是目录
-  if (!fs.statSync(skillPath).isDirectory()) {
-    console.error(`错误: "${skillPath}" 必须是目录`);
+  if (!fs.statSync(resolvedSkillPath).isDirectory()) {
+    console.error(`错误: "${resolvedSkillPath}" 必须是目录`);
     process.exit(1);
   }
 
@@ -208,14 +236,14 @@ function init() {
   const tempDir = `/tmp/git-publish-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
   fs.mkdirSync(tempDir, { recursive: true });
 
-  return tempDir;
+  return { tempDir, skillPath: resolvedSkillPath };
 }
 
 // ============== 主流程 ==============
 
 async function main() {
-  const tempDir = init();
-  const baseRealPath = realPath(skillPath);
+  const { tempDir, skillPath } = init();
+  const baseRealPath = path.resolve(skillPath);
 
   console.log(`\n🚀 发布 Skill: ${skillName}`);
 
@@ -228,6 +256,9 @@ async function main() {
       const match = content.match(/^#\s+(.+)$/m);
       if (match) description = match[1].trim();
     }
+
+    // 安全转义
+    const safeDescription = escapeShell(description);
 
     console.log(`📝 描述: ${description}`);
     if (topics.length) console.log(`🏷️  Topics: ${topics.join(', ')}`);
@@ -279,7 +310,8 @@ async function main() {
     }
 
     safeExec(`git add .`, { cwd: cloneDir });
-    safeExec(`git commit -m "${isUpdate ? 'Update' : 'Initial'}: ${description.replace(/"/g, '\\"')}"`, { cwd: cloneDir });
+    const commitMsg = `${isUpdate ? 'Update' : 'Initial'}: ${safeDescription}`;
+    safeExec(`git commit -m "${commitMsg}"`, { cwd: cloneDir });
 
     // 4. 创建 GitHub 仓库
     if (!isUpdate) {
@@ -378,7 +410,7 @@ async function updateProjectsMd(skillName, description) {
 
     if (lastDataRow > 0) {
       const num = lines.filter(l => l.match(/^\|\s*\d+\s*\|/)).length + 1;
-      const newRow = `| ${num} | ${skillName} | ${description} | https://github.com/${GITHUB_USER}/${skillName} |`;
+      const newRow = `| ${num} | ${skillName} | ${escapeShell(description)} | https://github.com/${GITHUB_USER}/${skillName} |`;
       lines.splice(lastDataRow + 1, 0, newRow);
       safeWriteFile(projectsPath, lines.join('\n'));
 
@@ -424,7 +456,7 @@ async function syncToCollection(skillName, skillPath, baseRealPath) {
     }
 
     safeExec(`git add .`, { cwd: tempCollDir });
-    safeExec(`git commit -m "feat: add ${skillName}"`, { cwd: tempCollDir });
+    safeExec(`git commit -m "feat: add ${escapeShell(skillName)}"`, { cwd: tempCollDir });
     safeExec(`git push`, { cwd: tempCollDir });
     console.log(`✅ 已同步到合集`);
 
