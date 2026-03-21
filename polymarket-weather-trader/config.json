@@ -1,0 +1,6 @@
+{
+  "entry_threshold": 0.10,
+  "exit_threshold": 0.25,
+  "max_position_usd": 1.0,
+  "max_market_exposure_usd": 30.0
+}
