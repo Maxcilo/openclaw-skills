@@ -25,44 +25,70 @@ const COLLECTION_REPO = 'openclaw-skills';
 
 // ============== 安全函数 ==============
 
-/**
- * 安全读取文件
- */
 function safeReadFile(filePath) {
   return fs.readFileSync(filePath, 'utf-8');
 }
 
-/**
- * 安全写入文件
- */
 function safeWriteFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf-8');
 }
 
 /**
- * 验证项目名称（只允许字母数字中划线）
+ * 验证项目名称
  */
 function validateProjectName(name) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9-_]*$/.test(name)) {
-    throw new Error(`项目名称 "${name}" 包含非法字符，只允许字母、数字、中划线`);
+    throw new Error(`项目名称包含非法字符，只允许字母、数字、中划线，且不能以中划线开头`);
   }
-  if (name.length > 100) {
-    throw new Error('项目名称过长');
-  }
+  if (name.length > 100) throw new Error('项目名称过长');
   return true;
+}
+
+/**
+ * 验证 topic 标签
+ */
+function validateTopic(topic) {
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(topic)) {
+    throw new Error(`topic "${topic}" 包含非法字符`);
+  }
+  if (topic.length > 50) throw new Error(`topic "${topic}" 过长`);
+  return true;
+}
+
+/**
+ * 验证文件路径（防止符号链接攻击）
+ */
+function validateSourcePath(basePath, fileName) {
+  const fullPath = path.join(basePath, fileName);
+  const stat = fs.lstatSync(fullPath);
+  
+  // 检查是否是符号链接
+  if (stat.isSymbolicLink()) {
+    const realPath = fs.realpathSync(fullPath);
+    throw new Error(`不支持符号链接: ${fileName} -> ${realPath}`);
+  }
+  
+  // 检查目标是否在允许范围内
+  if (!realPath.startsWith(basePath)) {
+    throw new Error(`路径遍历检测: ${fileName}`);
+  }
+  
+  return true;
+}
+
+function realPath(basePath) {
+  return path.resolve(basePath);
 }
 
 /**
  * 安全执行命令
  */
 function safeExec(command, options = {}) {
-  const defaultOptions = { stdio: 'pipe' };
+  const { throwOnError = true, ...execOptions } = options;
   try {
-    return execSync(command, { ...defaultOptions, ...options }).toString('utf-8');
+    return execSync(command, { stdio: 'pipe', ...execOptions }).toString('utf-8');
   } catch (error) {
-    if (options.throwOnError !== false) {
-      throw error;
-    }
+    if (throwOnError) throw error;
     return null;
   }
 }
@@ -78,19 +104,16 @@ function githubApi(method, endpoint, data = null) {
     'X-GitHub-Api-Version': '2022-11-28'
   };
 
-  const fetch = require('child_process').execSync;
-  
   let curlCmd = `curl -s -X ${method} "${url}"`;
   Object.entries(headers).forEach(([k, v]) => {
     curlCmd += ` -H "${k}: ${v}"`;
   });
-  
+
   if (data) {
-    // JSON 转义
-    const safeData = JSON.stringify(data).replace(/"/g, '\\"');
-    curlCmd += ` -d "${safeData}"`;
+    const safeData = JSON.stringify(data);
+    curlCmd += ` -d '${safeData}'`;
   }
-  
+
   const result = execSync(curlCmd, { encoding: 'utf-8' });
   try {
     return JSON.parse(result);
@@ -113,7 +136,6 @@ function showHelp() {
   console.log('');
   console.log('示例:');
   console.log('  node git-publish.js skills/my-skill');
-  console.log('  node git-publish.js skills/my-skill --update');
   console.log('  node git-publish.js skills/my-skill --topics=openclaw,trading --release=v1.0.0');
 }
 
@@ -123,7 +145,7 @@ if (args.length < 1 || args[0] === '--help' || args[0] === '-h') {
 }
 
 // 解析参数
-const skillPath = args[0].replace(/^\.\//, '');
+let skillPath = args[0].replace(/^\.\//, '');
 const isUpdate = args.includes('--update');
 
 let topics = [];
@@ -132,14 +154,20 @@ let release = '';
 args.forEach(arg => {
   if (arg.startsWith('--topics=')) {
     const value = arg.replace('--topics=', '');
-    topics = value.split(',').map(t => t.trim()).filter(t => t);
+    topics = value.split(',')
+      .map(t => t.trim().toLowerCase())
+      .filter(t => t)
+      .map(t => {
+        validateTopic(t);
+        return t;
+      });
   }
   if (arg.startsWith('--release=')) {
     release = arg.replace('--release=', '').trim();
   }
 });
 
-const skillName = path.basename(skillPath);
+let skillName = path.basename(skillPath);
 
 // ============== 初始化 ==============
 
@@ -152,12 +180,27 @@ function init() {
     process.exit(1);
   }
 
+  // 读取用户名（可选）
+  const userConfigPath = path.join(VAULT_PATH, 'github_user');
+  if (fs.existsSync(userConfigPath)) {
+    GITHUB_USER = safeReadFile(userConfigPath).trim();
+  }
+
   // 验证项目名称
   validateProjectName(skillName);
 
-  // 检查 skill 路径
+  // 解析为绝对路径并验证
+  skillPath = path.resolve(skillPath);
+  
+  // 检查 skill 路径是否存在
   if (!fs.existsSync(skillPath)) {
     console.error(`错误: Skill "${skillPath}" 不存在`);
+    process.exit(1);
+  }
+
+  // 必须是目录
+  if (!fs.statSync(skillPath).isDirectory()) {
+    console.error(`错误: "${skillPath}" 必须是目录`);
     process.exit(1);
   }
 
@@ -172,10 +215,10 @@ function init() {
 
 async function main() {
   const tempDir = init();
-  let success = false;
+  const baseRealPath = realPath(skillPath);
 
   console.log(`\n🚀 发布 Skill: ${skillName}`);
-  
+
   try {
     // 读取描述
     let description = skillName;
@@ -196,68 +239,77 @@ async function main() {
 
     if (isUpdate) {
       console.log(`\n📥 更新现有仓库...`);
-      safeExec(`git clone https://[MASKED]@github.com/${GITHUB_USER}/${skillName}.git ${cloneDir}`);
-      // 清理旧文件
+      safeExec(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${skillName}.git ${cloneDir}`);
+      
+      // 清理旧文件，保留 .git
       fs.readdirSync(cloneDir).forEach(f => {
-        if (f !== '.git') fs.rmSync(path.join(cloneDir, f), { recursive: true });
+        if (f !== '.git') {
+          const fullPath = path.join(cloneDir, f);
+          fs.rmSync(fullPath, { recursive: true, force: true });
+        }
       });
     } else {
       console.log(`\n📦 创建新仓库...`);
     }
 
-    // 2. 复制文件
-    fs.readdirSync(skillPath).forEach(f => {
+    // 2. 复制文件（带安全验证）
+    const files = fs.readdirSync(skillPath);
+    for (const f of files) {
+      // 跳过敏感目录
+      if (f === 'node_modules' || f === '__pycache__' || f === '.git') continue;
+      
       const src = path.join(skillPath, f);
       const dest = path.join(cloneDir, f);
-      // 跳过 node_modules 和 __pycache__
-      if (f === 'node_modules' || f === '__pycache__') return;
+      
+      // 验证路径安全
+      validateSourcePath(baseRealPath, f);
+      
       if (fs.statSync(src).isDirectory()) {
         fs.cpSync(src, dest, { recursive: true });
       } else {
         fs.copyFileSync(src, dest);
       }
-    });
+    }
 
     // 3. Git 操作
     if (!isUpdate) {
-      safeExec(`cd ${cloneDir} && git init`);
-      safeExec(`cd ${cloneDir} && git config user.email "bot@openclaw.ai"`);
-      safeExec(`cd ${cloneDir} && git config user.name "OpenClaw Bot"`);
+      safeExec(`git init`, { cwd: cloneDir });
+      safeExec(`git config user.email "bot@openclaw.ai"`, { cwd: cloneDir });
+      safeExec(`git config user.name "OpenClaw Bot"`, { cwd: cloneDir });
     }
 
-    safeExec(`cd ${cloneDir} && git add .`);
-    const commitMsg = `${isUpdate ? 'Update' : 'Initial'}: ${description.replace(/"/g, '\\"')}`;
-    safeExec(`cd ${cloneDir} && git commit -m "${commitMsg}"`);
+    safeExec(`git add .`, { cwd: cloneDir });
+    safeExec(`git commit -m "${isUpdate ? 'Update' : 'Initial'}: ${description.replace(/"/g, '\\"')}"`, { cwd: cloneDir });
 
-    // 4. 创建 GitHub 仓库（仅新创建时）
+    // 4. 创建 GitHub 仓库
     if (!isUpdate) {
       console.log(`🔧 创建 GitHub 仓库...`);
       try {
         githubApi('POST', '/user/repos', {
           name: skillName,
           private: false,
-          auto_init: true
+          auto_init: false
         });
       } catch (e) {
-        // 仓库可能已存在
-        console.log(`⚠️ 仓库可能已存在`);
+        if (e.message && !e.message.includes('already exists')) {
+          throw e;
+        }
+        console.log(`⚠️ 仓库已存在`);
       }
 
-      safeExec(`cd ${cloneDir} && git remote add origin https://[MASKED]@github.com/${GITHUB_USER}/${skillName}.git`);
+      safeExec(`git remote add origin https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${skillName}.git`, { cwd: cloneDir });
     }
 
     // 5. 推送
-    safeExec(`cd ${cloneDir} && git push -u origin main`);
+    safeExec(`git push -u origin main`, { cwd: cloneDir });
     console.log(`✅ 已发布到: https://github.com/${GITHUB_USER}/${skillName}`);
 
     // 6. 添加 Topics
     if (topics.length) {
       console.log(`\n🏷️ 添加 Topics...`);
       try {
-        githubApi('PATCH', `/repos/${GITHUB_USER}/${skillName}`, {
-          topics: topics
-        });
-        console.log(`✅ Topics 已添加: ${topics.join(', ')}`);
+        githubApi('PATCH', `/repos/${GITHUB_USER}/${skillName}`, { topics });
+        console.log(`✅ Topics: ${topics.join(', ')}`);
       } catch (e) {
         console.log(`⚠️ Topics 添加失败: ${e.message}`);
       }
@@ -272,7 +324,7 @@ async function main() {
           name: release,
           body: description
         });
-        console.log(`✅ Release 已创建: ${release}`);
+        console.log(`✅ Release: ${release}`);
       } catch (e) {
         console.log(`⚠️ Release 创建失败: ${e.message}`);
       }
@@ -284,9 +336,8 @@ async function main() {
 
     // 9. 同步到合集
     console.log(`\n🔄 同步到 openclaw-skills 合集...`);
-    await syncToCollection(skillName, skillPath);
+    await syncToCollection(skillName, skillPath, baseRealPath);
 
-    success = true;
     console.log(`\n🎉 发布完成!`);
 
   } catch (error) {
@@ -304,9 +355,8 @@ async function main() {
 
 async function updateProjectsMd(skillName, description) {
   try {
-    // 克隆 PROJECTS.md
     const tempProjDir = `/tmp/projects-${Date.now()}`;
-    safeExec(`git clone https://[MASKED]@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempProjDir}`);
+    safeExec(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempProjDir}`);
 
     const projectsPath = path.join(tempProjDir, 'PROJECTS.md');
     if (!fs.existsSync(projectsPath)) {
@@ -316,11 +366,10 @@ async function updateProjectsMd(skillName, description) {
 
     let content = safeReadFile(projectsPath);
     if (content.includes(skillName)) {
-      console.log(`⚠️ ${skillName} 已存在于 PROJECTS.md`);
+      console.log(`⚠️ 已存在于 PROJECTS.md`);
       return;
     }
 
-    // 添加新行
     const lines = content.split('\n');
     const lastDataRow = lines.reduce((acc, line, i) => {
       if (line.match(/^\|\s*\d+\s*\|/)) acc = i;
@@ -333,10 +382,10 @@ async function updateProjectsMd(skillName, description) {
       lines.splice(lastDataRow + 1, 0, newRow);
       safeWriteFile(projectsPath, lines.join('\n'));
 
-      safeExec(`cd ${tempProjDir} && git add .`);
-      safeExec(`cd ${tempProjDir} && git commit -m "docs: update PROJECTS.md"`);
-      safeExec(`cd ${tempProjDir} && git push`);
-      console.log(`✅ 已更新 PROJECTS.md`);
+      safeExec(`git add .`, { cwd: tempProjDir });
+      safeExec(`git commit -m "docs: update PROJECTS.md"`, { cwd: tempProjDir });
+      safeExec(`git push`, { cwd: tempProjDir });
+      console.log(`✅ PROJECTS.md 已更新`);
     }
 
     fs.rmSync(tempProjDir, { recursive: true, force: true });
@@ -345,35 +394,38 @@ async function updateProjectsMd(skillName, description) {
   }
 }
 
-async function syncToCollection(skillName, skillPath) {
+async function syncToCollection(skillName, skillPath, baseRealPath) {
   try {
     const tempCollDir = `/tmp/collection-${Date.now()}`;
-    safeExec(`git clone https://[MASKED]@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempCollDir}`);
+    safeExec(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempCollDir}`);
 
     const targetDir = path.join(tempCollDir, skillName);
     if (fs.existsSync(targetDir)) {
       fs.rmSync(targetDir, { recursive: true, force: true });
     }
 
-    fs.cpSync(skillPath, targetDir, { recursive: true });
+    fs.mkdirSync(targetDir, { recursive: true });
 
-    // 清理
-    const cleanup = (dir) => {
-      if (!fs.existsSync(dir)) return;
-      fs.readdirSync(dir).forEach(f => {
-        const fullPath = path.join(dir, f);
-        if (f === 'node_modules' || f === '__pycache__') {
-          fs.rmSync(fullPath, { recursive: true, force: true });
-        } else if (fs.statSync(fullPath).isDirectory()) {
-          cleanup(fullPath);
-        }
-      });
-    };
-    cleanup(targetDir);
+    // 安全复制
+    const files = fs.readdirSync(skillPath);
+    for (const f of files) {
+      if (f === 'node_modules' || f === '__pycache__' || f === '.git') continue;
+      
+      const src = path.join(skillPath, f);
+      const dest = path.join(targetDir, f);
+      
+      validateSourcePath(baseRealPath, f);
+      
+      if (fs.statSync(src).isDirectory()) {
+        fs.cpSync(src, dest, { recursive: true });
+      } else {
+        fs.copyFileSync(src, dest);
+      }
+    }
 
-    safeExec(`cd ${tempCollDir} && git add .`);
-    safeExec(`cd ${tempCollDir} && git commit -m "feat: add ${skillName}"`);
-    safeExec(`cd ${tempCollDir} && git push`);
+    safeExec(`git add .`, { cwd: tempCollDir });
+    safeExec(`git commit -m "feat: add ${skillName}"`, { cwd: tempCollDir });
+    safeExec(`git push`, { cwd: tempCollDir });
     console.log(`✅ 已同步到合集`);
 
     fs.rmSync(tempCollDir, { recursive: true, force: true });
