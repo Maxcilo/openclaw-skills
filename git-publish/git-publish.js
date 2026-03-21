@@ -455,6 +455,10 @@ async function syncToCollection(skillName, skillPath, baseRealPath) {
       }
     }
 
+    // 自动生成 README
+    console.log(`📝 生成 README...`);
+    await generateReadme(tempCollDir);
+
     safeExec(`git add .`, { cwd: tempCollDir });
     safeExec(`git commit -m "feat: add ${escapeShell(skillName)}"`, { cwd: tempCollDir });
     safeExec(`git push`, { cwd: tempCollDir });
@@ -464,6 +468,62 @@ async function syncToCollection(skillName, skillPath, baseRealPath) {
   } catch (e) {
     console.log(`⚠️ 合集同步失败: ${e.message}`);
   }
+}
+
+/**
+ * 自动生成 README.md
+ */
+async function generateReadme(collectionDir) {
+  const readmePath = path.join(collectionDir, 'README.md');
+  const projects = [];
+
+  // 获取合集中的所有项目目录
+  const dirs = fs.readdirSync(collectionDir).filter(f => {
+    const fullPath = path.join(collectionDir, f);
+    return fs.statSync(fullPath).isDirectory() && !f.startsWith('.');
+  });
+
+  // 为每个项目获取信息
+  for (const dir of dirs) {
+    const skillPath = path.join(collectionDir, dir);
+    const skillMdPath = path.join(skillPath, 'SKILL.md');
+    
+    let description = dir;
+    if (fs.existsSync(skillMdPath)) {
+      const content = safeReadFile(skillMdPath);
+      const match = content.match(/^#\s+(.+)$/m);
+      if (match) description = match[1].trim();
+    }
+
+    projects.push({
+      name: dir,
+      description: description,
+      url: `https://github.com/${GITHUB_USER}/${dir}`
+    });
+  }
+
+  // 按名称排序
+  projects.sort((a, b) => a.name.localeCompare(b.name));
+
+  // 生成 README
+  const readmeContent = `# OpenClaw Skills Collection
+
+> OpenClaw Agent 技能合集
+
+## 项目列表
+
+| # | 项目 | 说明 | 链接 |
+|---|------|------|------|
+${projects.map((p, i) => `| ${i + 1} | ${p.name} | ${p.description} | [GitHub](${p.url}) |`).join('\n')}
+
+---
+
+**维护人**: 大富小姐姐 🎀
+**更新时间**: ${new Date().toISOString().split('T')[0]}
+`;
+
+  safeWriteFile(readmePath, readmeContent);
+  console.log(`✅ README.md 已生成 (${projects.length} 个项目)`);
 }
 
 main();
