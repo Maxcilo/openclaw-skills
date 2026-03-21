@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "lastUpdate": "2026-02-15",
+    "totalAssetsRange": ">500k",
+    "netWorthRange": ">500k",
+    "hasDebt": true
+  },
+  "distribution": {
+    "crypto": {
+      "percentage": "100%",
+      "mainPlatforms": [
+        "交易所",
+        "链上钱包"
+      ],
+      "hasContract": false
+    },
+    "traditional": {
+      "percentage": "0%"
+    }
+  },
+  "note": "此为脱敏摘要，不包含具体金额、账户信息"
+}
