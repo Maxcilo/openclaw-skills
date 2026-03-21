@@ -57,6 +57,13 @@ function validateProjectName(name) {
 }
 
 /**
+ * 转义 Markdown 表格内容
+ */
+function escapeMarkdownTable(str) {
+  return String(str).replace(/\|/g, '\\|').replace(/\n/g, ' ');
+}
+
+/**
  * 验证 topic 标签
  */
 function validateTopic(topic) {
@@ -393,9 +400,9 @@ async function main() {
     console.log(`\n📝 更新 PROJECTS.md...`);
     await updateProjectsMd(skillName, description);
 
-    // 9. 同步到合集
+    // 9. 同步到合集（更新模式也会重新生成 README）
     console.log(`\n🔄 同步到 openclaw-skills 合集...`);
-    await syncToCollection(skillName, skillPath, baseRealPath);
+    await syncToCollection(skillName, skillPath, baseRealPath, isUpdate);
 
     console.log(`\n🎉 发布完成!`);
 
@@ -453,7 +460,7 @@ async function updateProjectsMd(skillName, description) {
   }
 }
 
-async function syncToCollection(skillName, skillPath, baseRealPath) {
+async function syncToCollection(skillName, skillPath, baseRealPath, isUpdate = false) {
   try {
     const tempCollDir = `/tmp/collection-${Date.now()}`;
     safeExec(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempCollDir}`);
@@ -482,9 +489,9 @@ async function syncToCollection(skillName, skillPath, baseRealPath) {
       }
     }
 
-    // 自动生成 README
+    // 自动生成 README（每次同步都重新生成，保持最新）
     console.log(`📝 生成 README...`);
-    await generateReadme(tempCollDir);
+    generateReadme(tempCollDir);
 
     safeExec(`git add .`, { cwd: tempCollDir });
     safeExec(`git commit -m "feat: add ${escapeShell(skillName)}"`, { cwd: tempCollDir });
@@ -541,7 +548,7 @@ async function generateReadme(collectionDir) {
 
 | # | 项目 | 说明 | 链接 |
 |---|------|------|------|
-${projects.map((p, i) => `| ${i + 1} | ${p.name} | ${p.description} | [GitHub](${p.url}) |`).join('\n')}
+${projects.map((p, idx) => `| ${idx + 1} | ${p.name} | ${p.description} | [GitHub](${p.url}) |`).join('\n')}
 
 ---
 
