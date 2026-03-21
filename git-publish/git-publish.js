@@ -56,12 +56,7 @@ function validateProjectName(name) {
   return true;
 }
 
-/**
- * 转义 Markdown 表格内容
- */
-function escapeMarkdownTable(str) {
-  return String(str).replace(/\|/g, '\\|').replace(/\n/g, ' ');
-}
+
 
 /**
  * 验证 topic 标签
@@ -460,7 +455,7 @@ async function updateProjectsMd(skillName, description) {
   }
 }
 
-async function syncToCollection(skillName, skillPath, baseRealPath, isUpdate = false) {
+async function syncToCollection(skillName, skillPath, baseRealPath) {
   try {
     const tempCollDir = `/tmp/collection-${Date.now()}`;
     safeExec(`git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${COLLECTION_REPO}.git ${tempCollDir}`);
