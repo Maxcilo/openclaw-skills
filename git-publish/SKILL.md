@@ -2,6 +2,12 @@
 
 > 将 Skill 发布到 GitHub 的工具
 
+## 使用方法
+
+```bash
+node scripts/git-publish.js <skill-path> [--update] [--topics=tag1,tag2] [--release=v1.0.0]
+```
+
 ## 功能
 
 1. **发布新 Skill** - 将本地 skill 发布到独立 GitHub 仓库
