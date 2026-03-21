@@ -15,7 +15,6 @@
 | 5 | btc-harami | BTC 双孕线形态监控 | https://github.com/Maxcilo/btc-harami |
 | 6 | weather-trader | Polymarket 天气交易 | https://github.com/Maxcilo/polymarket-weather-trader |
 | 7 | evm-toolkit | EVM 链上工具集 | https://github.com/Maxcilo/evm-toolkit |
-| 8 | token-query | 代币查询对比工具 | https://github.com/Maxcilo/token-query |
 
 ---
 
