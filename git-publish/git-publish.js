@@ -114,9 +114,9 @@ function safeExec(command, options = {}) {
 }
 
 /**
- * 安全调用 GitHub API
+ * 安全调用 GitHub API（带限流处理）
  */
-function githubApi(method, endpoint, data = null) {
+function githubApi(method, endpoint, data = null, retries = 3) {
   const url = `https://api.github.com${endpoint}`;
   const headers = {
     'Authorization': `token ${GITHUB_TOKEN}`,
@@ -134,12 +134,34 @@ function githubApi(method, endpoint, data = null) {
     curlCmd += ` -d '${safeData}'`;
   }
 
-  const result = execSync(curlCmd, { encoding: 'utf-8' });
-  try {
-    return JSON.parse(result);
-  } catch {
-    return result;
+  for (let i = 0; i < retries; i++) {
+    try {
+      const result = execSync(curlCmd, { encoding: 'utf-8' });
+      
+      // 检查限流错误
+      if (result.includes('"message":') && result.includes('rate limit')) {
+        if (i < retries - 1) {
+          console.log(`⚠️ API 限流，等待重试...`);
+          sleep(5000 * (i + 1)); // 指数退避
+          continue;
+        }
+        throw new Error('GitHub API 限流，请稍后重试');
+      }
+      
+      try {
+        return JSON.parse(result);
+      } catch {
+        return result;
+      }
+    } catch (error) {
+      if (i === retries - 1) throw error;
+    }
   }
+}
+
+function sleep(ms) {
+  const end = Date.now() + ms;
+  while (Date.now() < end) {}
 }
 
 // ============== 主逻辑 ==============
@@ -222,13 +244,13 @@ function init() {
   
   // 检查 skill 路径是否存在
   if (!fs.existsSync(resolvedSkillPath)) {
-    console.error(`错误: Skill "${resolvedSkillPath}" 不存在`);
+    console.error(`错误: Skill 目录不存在: ${path.basename(resolvedSkillPath)}`);
     process.exit(1);
   }
 
   // 必须是目录
   if (!fs.statSync(resolvedSkillPath).isDirectory()) {
-    console.error(`错误: "${resolvedSkillPath}" 必须是目录`);
+    console.error(`错误: 必须是目录: ${path.basename(resolvedSkillPath)}`);
     process.exit(1);
   }
 
@@ -257,11 +279,16 @@ async function main() {
       if (match) description = match[1].trim();
     }
 
-    // 安全转义
-    const safeDescription = escapeShell(description);
+    // 安全转义，限制 commit message 长度
+    const MAX_COMMIT_LENGTH = 72;
+    const truncatedDesc = description.length > MAX_COMMIT_LENGTH 
+      ? description.substring(0, MAX_COMMIT_LENGTH - 3) + '...' 
+      : description;
+    const safeDescription = escapeShell(truncatedDesc);
 
     console.log(`📝 描述: ${description}`);
     if (topics.length) console.log(`🏷️  Topics: ${topics.join(', ')}`);
+    else console.log(`ℹ️  未指定 topics`);
     if (release) console.log(`📦 Release: ${release}`);
 
     // 1. 创建或克隆仓库
